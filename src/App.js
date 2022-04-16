@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from './DB_table.js'
+import DB_table from './DB_table.js'
+
+var matrix = [["name", "last name", "date of birth", "hi"], ["said", "mbarki", "63", "howdoudou"], ["hicham", "fadeza", "20", "omg"]]
+
 function App() {
+  
   return (
     <div>
     <header>
@@ -18,7 +20,7 @@ function App() {
     </header>
     
     <br></br>
-    <Table />
+    <DB_table titles= {matrix[0]} data = {matrix.slice(1,matrix.length )}/>
     <section id="about-sec" class="fwh-slide">
         <p class="about-title">About Project</p>
         <p class="about-p">

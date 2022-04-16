@@ -1,13 +1,29 @@
 import Button from 'react-bootstrap/Button'
 
+
+
 function Tbody(props) {
+   
     return (
        
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    {this.props.data.map(
-                        (value) => (<Th value= {value}/>))
+                {props.data.map((subtable) =>
+                        <Tr values= {subtable}/>
+                    )}
+            </tbody>
+    );
+}
+function Td({val}) {
+    return (
+        <td >{val}</td>
+    );
+}
+function Tr({values}){
+    return (
+    <tr>
+                    
+                    {values.map(
+                        (value) => (<Td val= {value}/>))
                         }
                     <td>
                         
@@ -22,11 +38,6 @@ function Tbody(props) {
                         </ul>
                     </td>
                 </tr>
-            </tbody>
-     
     );
-}
-function Td({value}) {
-    <td >{{value}}</td>
 }
 export default Tbody;

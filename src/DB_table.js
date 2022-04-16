@@ -3,7 +3,10 @@ import Table from 'react-bootstrap/Table'
 import Thead from './Thead.js'
 import Tbody from './Tbody.js'
 
+
 function DB_table(props) {
+  
+    
     return (
         <div>
             <section id="table" class="fwh-slide1">
@@ -15,11 +18,8 @@ function DB_table(props) {
                         
                         <div class="table-responsive">
                             <table class="table m-0">
-                                <Thead />
-                                {this.props.data.map(
-                                    (subtable) => (<Tbody data={subtable}/>))
-                                    }
-                                
+                                <Thead titles= {props.titles}/>
+                                <Tbody data={props.data}/>
                             </table>
 
                         </div>
