@@ -1,38 +1,275 @@
-.App {
-  text-align: center;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  background: #dd5e89;
+  background: -webkit-linear-gradient(to left, #dd5e89, #f7bb97);
+  background: linear-gradient(to left, #dd5e89, #f7bb97);
   min-height: 100vh;
+}
+li,
+a,
+button,
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navbar {
+  
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+  padding: 35px 10%;
+  background-color: rgb(34,34,34);
+  transition: all 0.6s ease-in-out;
+}
+
+.logo {
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.7s ease 0s;
+}
+
+.nav-links {
+  list-style: none;
+}
+
+.nav-links li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.nav-links li a {
+  transition: all 0.7s ease 0s;
+}
+
+.nav-links li a:hover {
+  color: #ffffff;
+}
+
+button {
+  color: #f3f3f3;
+  padding: 9px 25px;
+  background-color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.7s ease 0s;
+  outline: none;
+}
+
+button:hover {
+  background-color: #f3f3f3;
+  
+  color: #ffffff;
+}
+
+.logo:hover {
+  color: #000000;
+}
+
+.sticky {
+  width: 100%;
+  top: 0;
+  height: 60px;
+  animation: smoothScroll 0.80s forwards;
+  background-color: #000000;
+  padding: 20px 10%;
+}
+
+@keyframes smoothScroll {
+  0% {
+      transform: translateY(-100px);
+  }
+  100% {
+      transform: translateY(0px);
+  }
+}
+
+.newli {
+  color: #ffffff;
+  transition: all 0.6s ease 0s;
+}
+
+.newli:hover {
+  color: rgb(34,34,34);
+}
+
+.newbutton {
+  color: #000000;
+  background-color: rgb(34,34,34);
+}
+
+.newbutton:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.table-content {
+  border-collapse: collapse;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  min-width: 400px;
+  width: 90%;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px grey;
+}
+
+.table-content th {
+  background-color: rgb(34,34,34);
+  text-align: left;
   color: white;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.table-content th,
+.table-content td {
+  padding: 12px 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.table-content tbody tr {
+  border-bottom: 1px solid rgb(231, 224, 224);
+}
+
+.table-content tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table-content tbody tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.table-content tbody tr:last-of-type {
+  border-bottom: 2px solid rgb(34,34,34);
+}
+
+.dropdown-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-content {
+  border: none;
+  border-radius: 10px;
+  display: none;
+  position: absolute;
+  background-color: black;
+  width: 180px;
+  z-index: 1;
+}
+
+.links {
+  color: rgb(255, 255, 255);
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.links:hover {
+  background-color: white;
+  color: #000000;
+}
+
+.table-content th {
+  cursor: pointer;
+}
+
+.table-content .th-sort-asc::after {
+  content: "\25b4";
+}
+
+.table-content .th-sort-desc::after {
+  content: "\25be";
+}
+
+.table-content .th-sort-asc::after,
+.table-content .th-sort-desc::after {
+  margin-left: 5px;
+}
+
+.table-content .th-sort-asc,
+.table-content .th-sort-desc {
+  background: rgb(34,34,34);
+}
+
+.fwh-slide {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 50px;
+}
+
+.fwh-slide p {
+  margin: 0;
+}
+
+#about-sec {
+  background-color: #f3f3f3;
+}
+
+.about-title {
+  font-size: 60px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  line-height: 1.25;
+  padding-top: 60px;
+  padding-bottom: 70px;
+  color: #003225;
+}
+
+.about-p {
+  font-size: 30px;
+  font-family: 'Poppins';
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+footer {
+  width: 100%;
+  background-color: #222;
+  padding: 60px 0px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 29%;
+}
+
+.wrapper ul {
+  list-style: none;
+}
+
+.wrapper li {
+  display: inline-block;
+  padding: 0px 50px;
+}
+
+i {
+  
+  color: #ffffff;
+  cursor: pointer;
+}
+
+i:hover {
+  color: rgb(34,34,34);
+}
+
+#table {
+  min-height: 50vh;
+  height: fit-content;
 }
