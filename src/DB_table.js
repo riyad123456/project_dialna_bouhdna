@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import Table from 'react-bootstrap/Table'
-
 import Thead from './Thead.js'
 import Tbody from './Tbody.js'
 
