@@ -3,7 +3,13 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DB_table from './DB_table.js'
 
-var matrix = [["name", "last name", "date of birth", "hi"], ["said", "mbarki", "63", "howdoudou"], ["hicham", "fadeza", "20", "omg"]]
+var matrix = [
+  ["name", "last name", "date of birth", "hi"], 
+  ["said", "mbarki", "63", "howdoudou"], 
+  ["hicham", "fadeza", "20", "omg"],
+  ["riyad","hay nahda", "20", "ryeh"],
+  ["achraf","harhoura", "21", "nod tg3ed"]
+]
 
 function App() {
   
