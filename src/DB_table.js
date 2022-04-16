@@ -17,7 +17,10 @@ function DB_table(props) {
                         <div class="table-responsive">
                             <table class="table m-0">
                                 <Thead />
-                                <Tbody />
+                                {this.props.data.map(
+                                    (subtable) => (<Tbody data={subtable}/>))
+                                    }
+                                
                             </table>
 
                         </div>
