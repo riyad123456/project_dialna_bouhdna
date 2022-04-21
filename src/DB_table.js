@@ -2,13 +2,22 @@ import logo from './logo.svg';
 import Table from 'react-bootstrap/Table'
 import Thead from './Thead.js'
 import Tbody from './Tbody.js'
+import React, { useEffect, useState } from 'react';
 
-
+var Ts = []
 function DB_table(props) {
-  
-    
+    const [items, setItems] = useState([]);
+    const doThis = () => {
+        {props.titles.map(
+            (json,val) => {
+                Ts = Object.keys(json)
+            }
+        )}
+    }
+    doThis()
     return (
         <div>
+            
             <section id="table" class="fwh-slide1">
         <div class="row">
             <div class="col-lg-7 mx-auto">
@@ -18,8 +27,11 @@ function DB_table(props) {
                         
                         <div class="table-responsive">
                             <table class="table m-0">
-                                <Thead titles= {props.titles}/>
+                              
+                                
+                                <Thead titles= {Ts}/>
                                 <Tbody data={props.data}/>
+                               
                             </table>
 
                         </div>

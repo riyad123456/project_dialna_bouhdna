@@ -2,18 +2,32 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DB_table from './DB_table.js'
+import React, { useEffect, useState } from 'react';
 
-var matrix = [
-  ["name", "last name", "date of birth", "hi"], 
-  ["said", "mbarki", "63", "howdoudou"], 
-  ["hicham", "fadeza", "20", "omg"],
-  ["riyad","hay nahda", "20", "ryeh"],
-  ["achraf","harhoura", "21", "nod tg3ed"]
-]
+
+
+
+var server = 'http://localhost:5001'
+var matrix = []
+var titles = []
 
 function App() {
-  
+  console.warn = () => {};
+  const [items, setItems] = useState([]);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch(server+"/all_Patient", { method: "GET" })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setItems(result);
+          
+        }
+      )
+  }, [])
+    
   return (
+    
     <div>
     <header>
         <div class="navbar">
@@ -26,7 +40,9 @@ function App() {
     </header>
     
     <br></br>
-    <DB_table titles= {matrix[0]} data = {matrix.slice(1,matrix.length )}/>
+    
+    <DB_table titles= {items} data = {items}/>
+   
     <section id="about-sec" class="fwh-slide">
         <p class="about-title">About Project</p>
         <p class="about-p">

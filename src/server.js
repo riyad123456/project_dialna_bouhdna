@@ -103,9 +103,9 @@ app.get('/all_Patient', (req, res) => {
     }
   });
 
-app.listen(5001, () => {
-    console.log("server has started on port 5000");
-  });
+  app.listen(5001, () => {
+    console.log("server has started on port 5001");
+    });
 
   
   
