@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import Thead from './Thead.js'
 import Tbody from './Tbody.js'
 import React, { useEffect, useState } from 'react';
-
+import './App.css';
 var Ts = []
 function DB_table(props) {
     const [items, setItems] = useState([]);
@@ -20,7 +20,7 @@ function DB_table(props) {
             
             <section id="table" class="fwh-slide1">
         <div class="row">
-            <div class="col-lg-7 mx-auto">
+            <div class="col-lg-7 mx-auto" >
                 <div class="card border-0 shadow">
                     <div class="card-body p-5">
 

@@ -10,36 +10,66 @@ import Button from 'react-bootstrap/Button'
 
 
 function Tbody({data}) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState();
   
   const [show, setShow] = useState(false);
-  
-   
-  const removeElem = val => {
-    //TO-DO
-  }
-  const edit = () => {
+  const [currentItem, setCurrentItem] = useState({})
+  const handleClose = () => setShow(false);
+  const  handleShow = (key)=>{
+    setShow(true);
     
+  }
+  const list = data.map(
+    (json,val) => {
+      let li = [];
+        Object.keys(json).map((key,value) => {
+            li = [...li,json[key]]
+        }
+          
+        )
+       
+       return <Tr  index = {val} editClick={() => {handleShow(val);edit(data[val])}} delClick={() => doeafak()} values= {li}/>
+    }
+)
+
+  const doeafak = () => {
+
+  }
+  const edit = (dt) => {
+    
+    setCurrentItem(dt)
+    console.log(currentItem)
   }
   return(
     <>
     <tbody>
-        {
-    data.map(
-      (json,val) => {
-        let li = [];
-          Object.keys(json).map((key,value) => {
-              li = [...li,json[key]]
-          }
-            
-          )
-          return <Tr  editClick={() => {setShow(true)}} delClick={() => {removeElem(val)}} values= {li}/>
-      }
-  )
-  }
+      
+      {list}
+        
     </tbody>
-    
-    <Popup state = {show} />
+   
+    <Modal show={show} size="lg" onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit instance</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+          {
+    Object.keys(currentItem).map((key,value) => {
+      return <FormGroup Key = {key} value={currentItem[key]}/>
+    })
+  }
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
 );
   
@@ -49,6 +79,17 @@ function Td({val}) {
   return (
       <td >{val}</td>
   );
+}
+function FormGroup({Key,value}){
+  return (
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>{Key}</Form.Label>
+            <Form.Control
+            defaultValue={value}
+              autoFocus
+            />
+          </Form.Group>
+          );
 }
 function Tr({values,delClick, editClick}){
  
@@ -73,10 +114,11 @@ function Tr({values,delClick, editClick}){
               </tr>
   );
 }
+/*
 function Popup({state}) {
-    
+  console.log(state)
   const [show, setShow] = useState(state);
-
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -120,7 +162,7 @@ function Popup({state}) {
 }
 
 
-/*class Tbody extends React.Component {
+class Tbody extends React.Component {
     
     constructor(props) {
       console.log(props)
