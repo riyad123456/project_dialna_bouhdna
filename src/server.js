@@ -48,7 +48,7 @@ app.get('/all_Patient', (req, res) => {
     var prov = req.body.Province
     try {
       const { id } = req.params;
-      
+      console.log(req)
       const updateTodo = await pool.query(
         "UPDATE Patient SET Phone_num = $1 ,Insurance =$2,Street_num=$3, Street_name=$4,Postal_code =$5,City=$6,Province=$7 WHERE patient_ID = $8;",
         [pn,ins,num, name, code , city, prov, id]
