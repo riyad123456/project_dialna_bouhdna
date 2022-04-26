@@ -5,8 +5,13 @@ import Table from 'react-bootstrap/Table'
 import DB_table from '../DB_table';
 import React, { useEffect, useState } from 'react';
 import Searchbar from './Searchbar';
+import { MDBCol } from "mdbreact";
 import '../App.css';
 var Ts = []
+var server = 'http://localhost:5001'
+
+
+
 function P_table(props) {
     
     const [items, setItems] = useState([]);
@@ -14,13 +19,34 @@ function P_table(props) {
         {props.titles.map(
             (json,val) => {
                 Ts = Object.keys(json)
-                console.log(json);
             }
             )}
     }
     
     doThis();
-    
+    const executeSearch = (word) => {
+        if (word === "") {
+            return false
+        }
+        if (word === undefined || word === null) {
+            console.log("Variable is either null or undefined");
+            return false
+        }
+        console.log(word)
+
+        
+        fetch(server+`/search/patient/${word}`, {  method: "GET"})
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+            setItems(result);
+            
+          }
+        )
+       
+       
+    }
     return (
         <div>
             
@@ -31,11 +57,11 @@ function P_table(props) {
                 <div class="card border-0 shadow">
                     <div class="card-body p-5">
 
-                        
+                    <MDBCol md="6">
+                            <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={(e) => { executeSearch(e.target.value)}}/>
+                            </MDBCol>
                         <div class="table-responsive">
-                        <div className='SearchBar'>
-                            <Searchbar placeholder= 'Search for Patient..' />
-                        </div>
+                        
                             <table class="table m-0">
                               
                                 

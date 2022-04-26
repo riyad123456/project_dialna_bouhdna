@@ -31,7 +31,7 @@ function Tbody({data}) {
           
         )
        
-       return <Tr  index = {val} editClick={() => {handleShow(val);edit(data[val])}} delClick={() => doeafak()} values= {li}/>
+       return <Tr  index = {val} editClick={() => {handleShow(val);edit(data[val])}} delClick={() => deleteItem(data[val])} values= {li}/>
     }
 )
 const getData = () => {
@@ -56,8 +56,18 @@ const editContent = Object.keys(currentItem).map((key,value) => {
   selectedRow.push(<FormGroup Key = {key} value={currentItem[key]}/>)
 })
 
-  const doeafak = () => {
-
+  const deleteItem  = (dt) => {
+   
+    
+    fetch(server+`/patient/${dt["patient_id"]}`, { 
+      method: "DELETE" ,
+      headers: {
+            "Content-Type": "application/json",
+            "x-access-token": "token-value",
+          },
+          params: dt["patient_id"]
+    }).then(window.location.reload(false))
+    
   }
   const edit = (dt) => {
     setCurrentItem(dt)

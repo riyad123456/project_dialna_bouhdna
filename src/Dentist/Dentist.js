@@ -25,7 +25,7 @@ const Dentist = (props) => {
         }
       )
   }, []);
-  const arr1 = 
+ 
   console.log(items.last_name);
   return (
     <div>
