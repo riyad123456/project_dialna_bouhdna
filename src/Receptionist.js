@@ -7,7 +7,9 @@ import React, { useEffect, useState } from 'react';
 var server = 'http://localhost:5001'
 var matrix = []
 var titles = []
+
 const Receptionist = () => {
+  
     console.warn = () => {};
     const [items, setItems] = useState([]);
     const [data, setData] = useState([]);
@@ -21,6 +23,7 @@ const Receptionist = () => {
           }
         )
     }, [])
+    console.log(items) ; 
   return (
     <div>
 

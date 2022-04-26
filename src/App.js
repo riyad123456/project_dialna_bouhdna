@@ -5,7 +5,7 @@ import {Routes, Route} from 'react-router-dom' ;
 
 import Patient from './Patient';
 import Receptionist from './Receptionist';
-import Dentist from './Dentist';
+import Dentist from './Dentist/Dentist';
 import Navbar from './Navbar';
 
 
@@ -14,7 +14,7 @@ function App() {
     
     <div>
       <Navbar />
-      
+
       <Routes>
         <Route path='/patient' element = {<Patient />}>
         </Route>

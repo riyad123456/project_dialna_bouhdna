@@ -39,21 +39,28 @@ app.get('/all_Patient', (req, res) => {
   })
 
   app.put("/pUpdate/:id", async (req, res) => {
-    var pn= req.body.Phone_num
-    var ins =req.body.Insurance
-    var num = req.body.Street_num
-    var name = req.body.Street_name
-    var code = req.body.Postal_code
-    var city = req.body.City
-    var prov = req.body.Province
+    var email =req.body.email
+    var pass = req.body.password
+    var fname = req.body.first_name
+    var lname = req.body.last_name
+    var ssn = req.body.ssn
+    var age = req.body.age
+    var gender = req.body.gender
+    var pn= req.body.phone_num
+    var ins =req.body.insurance
+    var num = req.body.street_num
+    var name = req.body.street_name
+    var code = req.body.postal_code
+    var city = req.body.city
+    var prov = req.body.province
     try {
       const { id } = req.params;
-      console.log(req)
+
       const updateTodo = await pool.query(
-        "UPDATE Patient SET Phone_num = $1 ,Insurance =$2,Street_num=$3, Street_name=$4,Postal_code =$5,City=$6,Province=$7 WHERE patient_ID = $8;",
-        [pn,ins,num, name, code , city, prov, id]
+        "UPDATE Patient SET Phone_num = $1 ,Insurance =$2,Street_num=$3, Street_name=$4,Postal_code =$5,City=$6,Province=$7,Email =$8,Password =$9,First_name =$10,Last_name =$11,SSN =$12,Age =$13,Gender =$14 WHERE patient_ID = $15;",
+        [pn,ins,num, name, code , city, prov,email,pass,fname,lname,ssn,age,gender, id]
       );
-  
+
       res.json("Patient was updated!");
     } catch (err) {
       console.error(err.message);
@@ -62,13 +69,13 @@ app.get('/all_Patient', (req, res) => {
 
   app.post("/pAdd", async (req, res) => {
     var id = req.body.ID
-    var email =req.body.email
-    var pass = req.body.pass
-    var fname = req.body.fname
-    var lname = req.body.lname
-    var ssn = req.body.ssn
-    var age = req.body.age
-    var gender = req.body.gender
+    var email =req.body.Email
+    var pass = req.body.Password
+    var fname = req.body.First_name
+    var lname = req.body.Last_name
+    var ssn = req.body.SSN
+    var age = req.body.Age
+    var gender = req.body.Gender
     var pn= req.body.Phone_num
     var ins =req.body.Insurance
     var num = req.body.Street_num
