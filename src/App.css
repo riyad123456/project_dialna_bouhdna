@@ -229,7 +229,9 @@ button:hover {
   padding-bottom: 70px;
   color: #003225;
 }
-
+.col-lg-7 mx-auto{
+  width: 90%;
+}
 .about-p {
   font-size: 30px;
   font-family: 'Poppins';

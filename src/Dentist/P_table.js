@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+
+import Thead from '../Thead'
+import Tbody from '../Tbody'
 import Table from 'react-bootstrap/Table'
-import Thead from './Thead.js'
-import Tbody from './Tbody.js'
+import DB_table from '../DB_table';
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import Searchbar from './Searchbar';
+import '../App.css';
 var Ts = []
-function DB_table(props) {
+function P_table(props) {
+    
     const [items, setItems] = useState([]);
     const doThis = () => {
         {props.titles.map(
             (json,val) => {
                 Ts = Object.keys(json)
+                console.log(json);
             }
-        )}
+            )}
     }
-    doThis()
+    
+    doThis();
+    
     return (
         <div>
             
             <section id="table" class="fwh-slide1">
+            
         <div class="row">
             <div class="col-lg-7 mx-auto" >
                 <div class="card border-0 shadow">
@@ -26,6 +33,9 @@ function DB_table(props) {
 
                         
                         <div class="table-responsive">
+                        <div className='SearchBar'>
+                            <Searchbar placeholder= 'Search for Patient..' />
+                        </div>
                             <table class="table m-0">
                               
                                 
@@ -44,4 +54,4 @@ function DB_table(props) {
     );
 }
 
-export default DB_table;
+export default P_table;
