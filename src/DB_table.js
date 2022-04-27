@@ -41,6 +41,7 @@ function DB_table(props) {
             },
             body: JSON.stringify(newValue)
       }).then(setShow(false))
+      .then( window.location.reload(false))
       
         
        
@@ -53,6 +54,7 @@ function DB_table(props) {
         <div>
             
             <section id="table" class="fwh-slide1">
+              
         <div class="row">
             <div class="col-lg-11 mx-auto" >
                 <div class="card border-0 shadow">
@@ -60,6 +62,7 @@ function DB_table(props) {
 
                         
                         <div class="table-responsive">
+                        <h1> Patients</h1>
                             <table class="table m-0">
                               
                                 

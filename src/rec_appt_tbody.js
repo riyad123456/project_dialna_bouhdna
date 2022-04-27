@@ -9,7 +9,7 @@ var server = 'http://localhost:5001'
 
 
 
-function rec_appt_tbody({data}) {
+function Rec_appt_tbody({data}) {
   const [items, setItems] = useState();
   var selectedRow = [];
   const [show, setShow] = useState(false);
@@ -40,8 +40,9 @@ const getData = () => {
   Object.keys(currentItem).map((key,value) => {
     currentItem[key] = elem[count++].value
 })
+
   
-  fetch(server+`/pUpdate/${currentItem["patient_id"]}`, { 
+  fetch(server+"/RDVUpdate", { 
     method: "PUT" ,
     headers: {
           "Content-Type": "application/json",
@@ -49,6 +50,7 @@ const getData = () => {
         },
         body: JSON.stringify(currentItem)
   }).then(setShow(false))
+  
   
      
 }
@@ -59,14 +61,15 @@ const editContent = Object.keys(currentItem).map((key,value) => {
   const deleteItem  = (dt) => {
    
     
-    fetch(server+`/patient/${dt["patient_id"]}`, { 
+    fetch(server+`/RDV/${dt["appointment_id"]}`, { 
       method: "DELETE" ,
       headers: {
             "Content-Type": "application/json",
             "x-access-token": "token-value",
           },
-          params: dt["patient_id"]
+          params: dt["appointment_id"]
     }).then(window.location.reload(false))
+    
     
   }
   const edit = (dt) => {
@@ -148,4 +151,4 @@ function Tr({values,delClick, editClick}){
   );
 }
 
-export default rec_appt_tbody;
+export default Rec_appt_tbody;

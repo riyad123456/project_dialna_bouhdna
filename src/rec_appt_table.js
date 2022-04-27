@@ -2,8 +2,9 @@ import Thead from './Thead.js'
 import Tbody from './Tbody.js'
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import Rec_appt_tbody from './Rec_appt_tbody';
 var Ts = []
-function rec_appt_table(props) {
+function Rec_appt_table(props) {
     const doThis = () => {
         {props.titles.map(
             (json,val) => {
@@ -23,11 +24,12 @@ function rec_appt_table(props) {
 
                         
                         <div class="table-responsive">
+                        <h1> Appointments</h1>
                             <table class="table m-0">
                               
                                 
                                 <Thead titles= {Ts}/>
-                                <Tbody data={props.data}/>
+                                <Rec_appt_tbody data={props.data}/>
                                
                             </table>
 
@@ -41,4 +43,4 @@ function rec_appt_table(props) {
     );
 }
 
-export default rec_appt_table;
+export default Rec_appt_table;

@@ -86,7 +86,7 @@ app.get('/all_Patient',async (req, res) => {
   });
 
   app.post("/patient/pAdd", async (req, res) => {
-    console.log(req.body)
+   
     var id = req.body.patient_id
     var email =req.body.email
     var pass = req.body.password
@@ -103,7 +103,7 @@ app.get('/all_Patient',async (req, res) => {
     var city = req.body.city
     var prov = req.body.province
     console.log(id, email , pass , fname , lname, pn, ssn, ins, age, gender , num, name, code, city, prov)
-    /*
+    
     try {
       
       
@@ -111,12 +111,12 @@ app.get('/all_Patient',async (req, res) => {
         "INSERT INTO Patient (Patient_ID, Email, Password, First_name, Last_name,Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,Postal_code, City, Province) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *",
         [id, email , pass , fname , lname, pn, ssn, ins, age, gender , num, name, code, city, prov]
       );
-     
+        console.log(newP)
       res.json(newP.rows[0]);
     } catch (err) {
       console.error(err.message);
     }
-    */
+    
   });
 
   app.delete("/patient/:id", async (req, res) => {
@@ -183,9 +183,9 @@ app.get('/all_RDV', (req, res) => {
   
   })
 
-  app.put("/RDVUpdate/:id", async (req, res) => {
-    
-    var bid =req.body.branch_ID
+  app.put("/RDVUpdate", async (req, res) => {
+    var id = req.body.appointment_id
+    var bid =req.body.branch_id
     var denti = req.body.dentist_identifier
     var type = req.body.appointment_type
     var statue = req.body.statue
@@ -194,7 +194,7 @@ app.get('/all_RDV', (req, res) => {
     var stime = req.body.start_time
     var etime = req.body.end_time
     try {
-      const { id } = req.params;
+     
       
       const updateTodo = await pool.query(
         "UPDATE Appointment SET Branch_ID = $1 ,Dentist_identifier =$2,Appointment_type=$3, Statue=$4,Room_assigned =$5,Appointment_date=$6,Start_time=$7, End_time=$8 WHERE Appointment_ID = $9;",
