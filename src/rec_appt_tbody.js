@@ -9,7 +9,7 @@ var server = 'http://localhost:5001'
 
 
 
-function Tbody({data}) {
+function rec_appt_tbody({data}) {
   const [items, setItems] = useState();
   var selectedRow = [];
   const [show, setShow] = useState(false);
@@ -148,4 +148,4 @@ function Tr({values,delClick, editClick}){
   );
 }
 
-export default Tbody;
+export default rec_appt_tbody;

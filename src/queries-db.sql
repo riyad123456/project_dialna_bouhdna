@@ -276,10 +276,20 @@ INSERT INTO Appointment(Appointment_ID, Branch_ID, Dentist_identifier,
   	Start_time, End_time, Patient_ID) VALUES (987654567, 214635515, 'Dentist',
   	'Teeth cleaning', 'Confirmed', 'Room 101', '2022-04-20', 1400, 1430, 784628391);
   	
-INSERT INTO 'Appointment'('Appointment_ID', 'Branch_ID', 'Dentist_identifier',
- 'Appointment_type', Statue, 'Room_assigned', 'Appointment_date',
-  	'Start_time', 'End_time', 'Patient_ID') VALUES ('44789199', '062076056', 'Dentist',
-  	'Cavity Removal;', 'Confirmed', 'Room 113', '2022-05-01', '11:00', '11:30', '784628391');
+INSERT INTO Appointment(Appointment_ID, Branch_ID, Dentist_identifier,
+ Appointment_type, Statue, Room_assigned, Appointment_date,
+  	Start_time, End_time, Patient_ID) VALUES (44789199, 062076056, 'Dentist',
+  	'Cavity Removal;', 'Confirmed', 'Room 113', '2022-05-01', 1100, 1130, 784628391);
+
+INSERT INTO Appointment(Appointment_ID, Branch_ID, Dentist_identifier,
+ Appointment_type, Statue, Room_assigned, Appointment_date,
+  	Start_time, End_time, Patient_ID) VALUES (327657483, 82375322, 'Dentist',
+  	'Teeth comparing ', 'Confirmed', 'Room 107', '2022-04-20', 1000, 1530, 892463789	);
+  	
+INSERT INTO Appointment(Appointment_ID, Branch_ID, Dentist_identifier,
+ Appointment_type, Statue, Room_assigned, Appointment_date,
+  	Start_time, End_time, Patient_ID) VALUES (55789199, 062076056, 'Dentist',
+  	'Cavity admiring;', 'Pending', 'Room 102', '2022-05-01', 700, 1030, 892463789	);
   	
 INSERT INTO 'Appointment_Procedure'('Appointment_ID', 'Patient_ID', 'Invoice_ID', 'Procedure_code', 'Procedure_type', 'Procedure_description',
     'Amount_of_procedures', 'Total_charge', 'Appointment_date', 'Insurance_claim_ID')

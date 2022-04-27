@@ -13,33 +13,27 @@ app.use(express.json()); //req.body
 app.get('/search/patient/:filter', async (req, res) => {
   
   
-  var {filter} = '%'+req.params +'%'
-  console.log(filter);
+
+  var filter = '%'+req.params.filter +'%'
   
-  
+
   try {
-      
-    
     const response = await pool.query('SELECT * from Patient WHERE UPPER(First_name) LIKE UPPER($1) OR UPPER(Last_name) LIKE UPPER($1)', [filter]);
-    console.log(response);
-    res.json(response.rows);
-  
-      
-    } catch (error) {
-      console.log(error.message)
-    }
     
-  
+    res.json(response.rows);
+    } catch (error) {
+      
+    }
   })
 
 app.get('/all_Patient',async (req, res) => {
   try {
     pool.query('SELECT * from Patient;', (err, response) => {
-      console.log(response.rows);
+      
       res.json(response.rows);
     });
   } catch (error) {
-    console.log(error.message)
+   
   }
     
   
@@ -51,12 +45,12 @@ app.get('/all_Patient',async (req, res) => {
       
     const { id } = req.params;
     const response =   await pool.query("SELECT * from Patient WHERE Patient_ID = $1;", [id]);
-    console.log(response);
+   
     res.json(response.rows[0]);
   
       
     } catch (error) {
-      console.log(error.message)
+     
     }
     
   
@@ -91,8 +85,9 @@ app.get('/all_Patient',async (req, res) => {
     }
   });
 
-  app.post("/pAdd", async (req, res) => {
-    var id = req.body.ID
+  app.post("/patient/pAdd", async (req, res) => {
+    console.log(req.body)
+    var id = req.body.patient_id
     var email =req.body.email
     var pass = req.body.password
     var fname = req.body.first_name
@@ -107,7 +102,8 @@ app.get('/all_Patient',async (req, res) => {
     var code = req.body.postal_code
     var city = req.body.city
     var prov = req.body.province
-    
+    console.log(id, email , pass , fname , lname, pn, ssn, ins, age, gender , num, name, code, city, prov)
+    /*
     try {
       
       
@@ -115,11 +111,12 @@ app.get('/all_Patient',async (req, res) => {
         "INSERT INTO Patient (Patient_ID, Email, Password, First_name, Last_name,Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,Postal_code, City, Province) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *",
         [id, email , pass , fname , lname, pn, ssn, ins, age, gender , num, name, code, city, prov]
       );
-  
+     
       res.json(newP.rows[0]);
     } catch (err) {
       console.error(err.message);
     }
+    */
   });
 
   app.delete("/patient/:id", async (req, res) => {
@@ -151,12 +148,12 @@ app.get('/all_RDV', (req, res) => {
   
   })
 
-
+/*
   app.get('/RDV/:id', async (req, res) => {
 
     try {
       
-    const { id } = req.params;
+    const { id } = req.params.id;
     const response =   await pool.query("SELECT * from Appointment WHERE Appointment_ID = $1;", [id]);
       
     res.json(response.rows[0]);
@@ -168,15 +165,15 @@ app.get('/all_RDV', (req, res) => {
     
   
   })
-
+*/
   app.get('/RDV_p/:id', async (req, res) => {
-
+   
     try {
       
-    const { id } = req.params;
+    const  id  = req.params.id;
     const response =   await pool.query("SELECT * from Appointment WHERE Patient_ID = $1;", [id]);
       
-    res.json(response.rows[0]);
+    res.json(response.rows);
   
       
     } catch (error) {

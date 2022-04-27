@@ -1,6 +1,6 @@
-
+import './table.css'
 import Thead from '../Thead'
-import Tbody from '../Tbody'
+import P_TBody from './P_TBody'
 import Table from 'react-bootstrap/Table'
 import DB_table from '../DB_table';
 import React, { useEffect, useState } from 'react';
@@ -8,10 +8,11 @@ import Searchbar from './Searchbar';
 import { MDBCol } from "mdbreact";
 import '../App.css';
 var Ts = []
+
 var server = 'http://localhost:5001'
 
 
-
+var myData =[]
 function P_table(props) {
     
     const [items, setItems] = useState([]);
@@ -21,12 +22,22 @@ function P_table(props) {
                 Ts = Object.keys(json)
             }
             )}
+           
     }
     
     doThis();
     const executeSearch = (word) => {
+        
         if (word === "") {
-            return false
+            fetch(server+"/all_Patient", { method: "GET" })
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                    
+                    setItems(result);
+                    
+        }
+      )
         }
         if (word === undefined || word === null) {
             console.log("Variable is either null or undefined");
@@ -39,7 +50,7 @@ function P_table(props) {
         .then(res => res.json())
         .then(
           (result) => {
-            
+            console.log(result)
             setItems(result);
             
           }
@@ -50,15 +61,15 @@ function P_table(props) {
     return (
         <div>
             
-            <section id="table" class="fwh-slide1">
+            <section id="table" class="fwh-slide1" variant="dark">
             
         <div class="row">
-            <div class="col-lg-7 mx-auto" >
+            <div class="col-lg-11 mx-auto" >
                 <div class="card border-0 shadow">
                     <div class="card-body p-5">
-
+                    <h1> Search for patient:</h1>
                     <MDBCol md="6">
-                            <input className="form-control" type="text" placeholder="Search" aria-label="Search" onChange={(e) => { executeSearch(e.target.value)}}/>
+                            <input className="form-control" autocomplete="off" type="text" id="search" placeholder="Search" aria-label="Search" onChange={(e) => { executeSearch(e.target.value)}}/>
                             </MDBCol>
                         <div class="table-responsive">
                         
@@ -66,7 +77,10 @@ function P_table(props) {
                               
                                 
                                 <Thead titles= {Ts}/>
-                                <Tbody data={props.data}/>
+                                <P_TBody data={
+                                  items
+                                    
+                                    }/>
                                
                             </table>
 
