@@ -3,6 +3,8 @@ import Tbody from './Tbody.js'
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Rec_appt_tbody from './Rec_appt_tbody';
+
+
 var Ts = []
 function Rec_appt_table(props) {
     const doThis = () => {

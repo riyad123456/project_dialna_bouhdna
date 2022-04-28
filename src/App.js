@@ -7,7 +7,8 @@ import Patient from './Patient';
 import Receptionist from './Receptionist';
 import Dentist from './Dentist/Dentist';
 import Navbar from './Navbar';
-
+import Login from './Login-Signup/Login';
+import Signup from './Login-Signup/Signup';
 
 function App() {    
   return (
@@ -16,13 +17,19 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path='/patient' element = {<Patient />}>
+        <Route path='/' element = {<Login />}>
+
+        </Route>
+        <Route path='/Signup' element={<Signup />}>
+
+        </Route>
+        <Route path='/Patient' element = {<Patient />}>
         </Route>
 
-        <Route path='/' element = {<Receptionist /> }>
+        <Route path='/Receptionist' element = {<Receptionist /> }>
         </Route>
 
-        <Route path='/dentist' element={<Dentist /> }>
+        <Route path='/Dentist' element={<Dentist /> }>
         </Route>
 
     </Routes>
