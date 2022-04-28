@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRef, useState, useEffect} from 'react';
-
+import { Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+var server = 'http://localhost:5001'
 const Login = () => {
 
 
@@ -19,7 +19,8 @@ const Login = () => {
 
     const userRef = useRef(); 
     const errRef = useRef() ;
-
+    
+    const [id, setID] = useState(0);
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
@@ -41,34 +42,32 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault() ; 
         try {
-            // const response = await axios.post(LOGIN_URL, 
-            //     JSON.stringify({user,pwd}) , 
-            //     {
-            //         headers : {'Content-Type' : 'application/json'} , 
-            //         withCredentials : true
-            //     }
-            //     );
-            // console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
+            var currentitem = {"username " : user, "password" : pwd, "role" : userType.toString()}
+            console.log(userType)
+            console.log(currentitem)
+            fetch(server+`/login/${currentitem["username "]}`, { 
+                method: "GET" }).then(res => res.json())
+                
+                .then( (result) =>{
+                    
+                    
+                    if(result["password"]==currentitem["password"] && result["role"]==currentitem["role"].toLowerCase()){
+                        setSuccess(true)
+                        setID(result["id"])
+                        console.log(result["id"])
+                        
+                    }
+                    else{
+                        
+                    }
+                    
 
-            // const accessToken = response?.data?.accessToken ;
-            // const roles = response?.data.roles ; 
-            // setAuth({user, pwd , roles, accessToken})
-            console.log({user,pwd})
-            setUser('');
-            setSuccess('') ;
-            setSuccess(true) ; 
+                })
+                
+
+         
         } catch (err) {
-            if(!err?.response) {
-                setErrMsg('No Server Response');
-            }else if (err.response?.status ===400) {
-                setErrMsg('Missing email or Password') ;
-            }else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized') ; 
-            }else {
-                setErrMsg('Login Failed') ; 
-            }
-            errRef.current.focus() ; 
+            console.log(err.message)
         }
         
     }
@@ -78,13 +77,8 @@ const Login = () => {
   return (
       <>
         {success? (
-            <section>
-                <h1>You are Logged in</h1>
-                <br />
-                <p>
-                    <a href={`/${userType}`}>Go to home</a>
-                </p>
-            </section>
+
+        <Navigate to={`/${userType}/${id}`} replace={true} />
         ) : (
 
             <section>
@@ -108,7 +102,7 @@ const Login = () => {
                             </div>
                         </div>
                     </label>
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">Username:</label>
                     <input type="text"
                     id='email'
                     ref={userRef}

@@ -2,7 +2,7 @@ import Thead from './Thead.js'
 import Tbody from './Tbody.js'
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Rec_appt_tbody from './Rec_appt_tbody';
+import Rec_appt_tbody from './rec_appt_tbody';
 
 
 var Ts = []

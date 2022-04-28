@@ -34,7 +34,9 @@ app.get('/search/patient/:filter', async (req, res) => {
 app.get('/all_Patient',async (req, res) => {
   try {
     pool.query('SELECT * from Patient;', (err, response) => {
-      console.log(response.rows);
+    
+
+
       res.json(response.rows);
     });
   } catch (error) {
@@ -50,7 +52,7 @@ app.get('/all_Patient',async (req, res) => {
       
     const { id } = req.params;
     const response =   await pool.query("SELECT * from Patient WHERE Patient_ID = $1;", [id]);
-    console.log(response);
+    
     res.json(response.rows[0]);
   
       
@@ -91,7 +93,7 @@ app.get('/all_Patient',async (req, res) => {
   });
 
   app.post("/pAdd", async (req, res) => {
-    var id = req.body.ID
+    var id = req.body.patient_id
     var email =req.body.email
     var pass = req.body.password
     var fname = req.body.first_name
@@ -339,22 +341,46 @@ app.delete("/treatment/:id", async (req, res) => {
 });
 
 // Utilisateur
-app.get('/login', async (req, res) => {
-   var user = req.body.username
-   var pass = req.body.password
-   var role = req.body.role
-  try {
-    
-  
-  const response =   await pool.query("SELECT * from Utilisateur WHERE Username = $1 AND  Password = $2 AND Role = $3;", [user,pass,role]);
-    
-  res.json(response.rows[0]);
+app.get('/login/:filter', async (req, res) => {
+  var user = req.params.filter
+ //  var pass = req.params.password
+ //  var role = req.params.role
 
-    
-  } catch (error) {
-    console.log(error.message)
-  }
-  
+ try {
+   
+ //AND  Password = $2 AND Role = $3
+ const response =   await pool.query("SELECT * from Utilisateur WHERE Username = $1  ;", [user]);
+   
+ res.json(response.rows[0]);
+ 
+
+   
+ } catch (error) {
+   console.log(error.message)
+ }
+ 
+
+})
+
+app.post('/loginADD', async (req, res) => {
+  var user = req.body.username
+  var pass = req.body.password
+  var role = req.body.role
+  var id = req.body.id
+
+ try {
+   
+ //AND  Password = $2 AND Role = $3
+ const response =   await pool.query("INSERT INTO   Utilisateur(Username, Password,Role, id)VALUES($1,$2,$3,$4) RETURNING * ;", [user,pass,role,id]);
+   
+ res.json(response.rows[0]);
+ 
+
+   
+ } catch (error) {
+   console.log(error.message)
+ }
+ 
 
 })
 
@@ -474,7 +500,7 @@ app.put("/eUpdate/:id", async (req, res) => {
 
 
 
-app.listen(5000, () => {
+app.listen(5001, () => {
     console.log("server has started on port 5000");
   });
 

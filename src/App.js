@@ -23,13 +23,13 @@ function App() {
         <Route path='/Signup' element={<Signup />}>
 
         </Route>
-        <Route path='/Patient' element = {<Patient />}>
+        <Route path='/Patient/:id' element = {<Patient />}>
         </Route>
 
-        <Route path='/Receptionist' element = {<Receptionist /> }>
+        <Route path='/Receptionist/:id' element = {<Receptionist /> }>
         </Route>
 
-        <Route path='/Dentist' element={<Dentist /> }>
+        <Route path='/Dentist/:id' element={<Dentist /> }>
         </Route>
 
     </Routes>

@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DB_table from './DB_table.js';
 import React, { useEffect, useState } from 'react';
-import Rec_appt_table from './Rec_appt_table' ;
+import Rec_appt_table from './rec_appt_table' ;
 
 
 var server = 'http://localhost:5001'
