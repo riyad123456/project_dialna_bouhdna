@@ -3,22 +3,25 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Default_Table from '../Default_Table';
+import './table.css'
 
 
 var server = 'http://localhost:5001'
 
 
-
-function Tbody({data}) {
+var title = ""
+function P_TBody({data}) {
   const [items, setItems] = useState();
   var selectedRow = [];
   const [show, setShow] = useState(false);
   const [currentItem, setCurrentItem] = useState({})
+  const [patientcnt, setpatientcnt] = useState();
   const handleClose = () => {
     setShow(false);
     
   }
-  const  handleShow = (key)=>{
+  const  handleShow = ()=>{
     setShow(true);
     
   }
@@ -31,47 +34,43 @@ function Tbody({data}) {
           
         )
        
-       return <Tr  index = {val} editClick={() => {handleShow(val);edit(data[val])}} delClick={() => deleteItem(data[val])} values= {li}/>
+       return <Tr  index = {val} editClick={() => {handleShow(); displayTreatments(data[val])}} delClick={() => displayAppointments(data[val])} values= {li}/>
     }
 )
-const getData = () => {
-  var elem = document.querySelector('#editForm')
-  var count = 0;
-  Object.keys(currentItem).map((key,value) => {
-    currentItem[key] = elem[count++].value
-})
-  
-  fetch(server+`/pUpdate/${currentItem["patient_id"]}`, { 
-    method: "PUT" ,
-    headers: {
-          "Content-Type": "application/json",
-          "x-access-token": "token-value",
-        },
-        body: JSON.stringify(currentItem)
-  }).then(setShow(false))
-  
-     
-}
-const editContent = Object.keys(currentItem).map((key,value) => {
-  selectedRow.push(<FormGroup Key = {key} value={currentItem[key]}/>)
-})
 
-  const deleteItem  = (dt) => {
-   
-    
-    fetch(server+`/patient/${dt["patient_id"]}`, { 
-      method: "DELETE" ,
-      headers: {
-            "Content-Type": "application/json",
-            "x-access-token": "token-value",
-          },
-          params: dt["patient_id"]
-    }).then(window.location.reload(false))
-    
-  }
-  const edit = (dt) => {
+
+
+  const displayAppointments = (dt) => {
+    title = 'Appointments'
     setCurrentItem(dt)
+    
+    setShow(true);
+    fetch(server+`/RDV_p/${dt['patient_id']}`, { method: "GET" })
+      .then(res => res.json())
+      .then(
+        (result) => {
+            
+          setpatientcnt(<Default_Table titles= {result} data = {result}/>)
+          
+        }
+      )
   }
+  const displayTreatments = (dt) => {
+      title = 'Treatments'
+    setCurrentItem(dt)
+    
+    setShow(true);
+    fetch(server+`/treatment/${dt['patient_id']}`, { method: "GET" })
+      .then(res => res.json())
+      .then(
+        (result) => {
+            
+          setpatientcnt(<Default_Table titles= {result} data = {result}/>)
+          
+        }
+      )
+}
+  
   const collectData = () => {
 
   }
@@ -83,25 +82,17 @@ const editContent = Object.keys(currentItem).map((key,value) => {
         
     </tbody>
    
-    <Modal show={show} size="lg" onHide={handleClose}>
+    <Modal show={show} size="lg" dialogClassName="modal-width" onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit instance</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form id="editForm"> 
-          {(editContent)}
-            {selectedRow}
-          </Form>
+          
+          {patientcnt}
+         
           
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary"  onClick={getData}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        
       </Modal>
     </>
 );
@@ -137,10 +128,10 @@ function Tr({values,delClick, editClick}){
                       <ul class="list-inline m-0">
                           
                           <li class="list-inline-item">
-                          <Button variant="outline-warning" onClick= {editClick}>Edit</Button>
+                          <Button variant="outline-primary" onClick= {editClick}>Display Treatments</Button>
                           </li>
                           <li class="list-inline-item">
-                          <Button variant="outline-danger" onClick = {delClick}>Delete</Button>
+                          <Button variant="outline-primary" onClick = {delClick}>Display Appointments</Button>
                           </li>
                       </ul>
                   </td>
@@ -148,4 +139,5 @@ function Tr({values,delClick, editClick}){
   );
 }
 
-export default Tbody;
+
+export default P_TBody;
