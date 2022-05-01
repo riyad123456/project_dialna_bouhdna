@@ -177,7 +177,8 @@ app.get('/all_RDV', (req, res) => {
     const { id } = req.params;
     const response =   await pool.query("SELECT * from Appointment WHERE Patient_ID = $1;", [id]);
       
-    res.json(response.rows[0]);
+    res.json(response.rows);
+    
   
       
     } catch (error) {
@@ -295,6 +296,7 @@ app.get('/treatment/:id', async (req, res) => {
   const response =   await pool.query("SELECT * from Treatment WHERE Patient_ID = $1;", [id]);
     
   res.json(response.rows);
+  
 
     
   } catch (error) {
@@ -495,6 +497,22 @@ app.put("/eUpdate/:id", async (req, res) => {
 
 
 
+app.get('/procedure/:id', async (req, res) => {
+  try {
+      
+    const { id } = req.params;
+    const response =   await pool.query("SELECT * from Appointment_Procedure WHERE Patient_ID = $1;", [id]);
+      
+    res.json(response.rows);
+    console.log(response);
+      
+    } catch (error) {
+      console.log(error.message)
+    }
+    
+ 
+
+})
 
 
 

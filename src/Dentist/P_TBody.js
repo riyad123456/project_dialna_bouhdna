@@ -34,7 +34,7 @@ function P_TBody({data}) {
           
         )
        
-       return <Tr  index = {val} editClick={() => {handleShow(); displayTreatments(data[val])}} delClick={() => displayAppointments(data[val])} values= {li}/>
+       return <Tr  index = {val} editClick={() => {handleShow(); displayTreatments(data[val])}} delClick={() =>  displayAppointments(data[val])} values= {li}/>
     }
 )
 
@@ -45,15 +45,17 @@ function P_TBody({data}) {
     setCurrentItem(dt)
     
     setShow(true);
+    console.log(server+`/RDV_p/${dt['patient_id']}`);
     fetch(server+`/RDV_p/${dt['patient_id']}`, { method: "GET" })
       .then(res => res.json())
       .then(
         (result) => {
-            
+          console.log(result);
           setpatientcnt(<Default_Table titles= {result} data = {result}/>)
           
         }
       )
+    
   }
   const displayTreatments = (dt) => {
       title = 'Treatments'
@@ -64,7 +66,6 @@ function P_TBody({data}) {
       .then(res => res.json())
       .then(
         (result) => {
-            
           setpatientcnt(<Default_Table titles= {result} data = {result}/>)
           
         }

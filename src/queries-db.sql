@@ -46,14 +46,18 @@ CREATE TABLE Payment(
 );
 
 CREATE TABLE Review(
-	Review_ID INTEGER PRIMARY KEY,
+	Review_ID BIGINT PRIMARY KEY,
     Employee_professionalism VARCHAR(100) NOT NULL,
-  	Value VARCHAR(100) NOT NULL,
+  	Valuee VARCHAR(100) NOT NULL,
   	Communication VARCHAR(100) NOT NULL,
   	Cleanliness VARCHAR(20) NOT NULL,
-    Patient_ID INTEGER NOT NULL,
+    Patient_ID 	 BIGINT NOT NULL,
   	FOREIGN KEY(Patient_ID) REFERENCES Patient(Patient_ID)
 );
+
+INSERT INTO Review(Review_ID,Employee_professionalism,Valuee,Communication,Cleanliness,Patient_ID)
+ VALUES(354546,'siyke n','spikeofdifjs',
+'gfdgddfgd','dfgdfgdfgdf',784628391);
 
 CREATE TABLE Utilisateur(
     Username VARCHAR(50) PRIMARY KEY,
@@ -95,15 +99,18 @@ Medication,Symptoms,Tooth,Patient_condition) VALUES (1,'test',892463789 ,
 'pomada sfra','sna  tart  ','nab','m9wda elih');
 
 CREATE TABLE Fee_Charge(
-	Fee_charge_ID INTEGER PRIMARY KEY,
+	Fee_charge_ID BIGINT PRIMARY KEY,
     Patient_charge decimal(9,2) NOT NULL,
-    Insurance decimal(9,2) NOT NULL,
+    Insurance VARCHAR(50) NOT NULL,
     Total_charge decimal(9,2) NOT NULL,
-    Bill_ID INTEGER NOT NULL,
+    
 	Appointment_ID INTEGER NOT NULL,
-    FOREIGN KEY(Appointment_ID) REFERENCES Appointment(Patient_ID),
-	FOREIGN KEY(Bill_ID) REFERENCES Payment(Bill_ID)
+    FOREIGN KEY(Appointment_ID) REFERENCES Appointment(Appointment_ID)
+	
 );
+
+INSERT INTO Fee_Charge(Fee_charge_ID,Patient_charge,Insurance,Total_charge,Appointment_ID) VALUES
+(546546,15445.35,'siyeks',578645.2,987654567);
 
 CREATE TABLE Tooth(
 	Tooth_name VARCHAR(100) NOT NULL,
@@ -112,11 +119,16 @@ CREATE TABLE Tooth(
     );
 
 CREATE TABLE Avis(
-	Comment_ID INTEGER PRIMARY KEY,
+	Comment_ID BIGINT PRIMARY KEY,
     Text varchar(100),
-    Treatment_ID INTEGER NOT NULL,
-	FOREIGN KEY(Treatment_ID) REFERENCES Treatment(Treatment_ID)
+    Branch_ID INTEGER NOT NULL,
+    Patient_ID INTEGER NOT NULL,
+	FOREIGN KEY(Branch_ID) REFERENCES Branch(Branch_ID),
+    FOREIGN KEY(Patient_ID) REFERENCES Patient(Patient_ID)
 );
+INSERT INTO Avis(Comment_ID,Text,Branch_ID,Patient_ID) 
+VALUES(4354354,'service d3if ',06207605,784628391);
+
     
 
 CREATE TABLE Branch(
@@ -139,20 +151,26 @@ CREATE TABLE Record(
 );
 
 CREATE TABLE Appointment_Procedure(
-    Appointment_ID INTEGER NOT NULL,
-    Patient_ID INTEGER NOT NULL,
-    Fee_charge_ID int NOT NULL,
-    Procedure_code int NOT NULL,
+    Appointment_ID BIGINT NOT NULL,
+    Patient_ID BIGINT NOT NULL,
+    Fee_charge_ID BIGINT NOT NULL,
+    Procedure_code BIGINT NOT NULL,
     Procedure_type VARCHAR(50) NOT NULL,
-    Procedure_description VARCHAR(50) NOT NULL,
-    Amount_of_procedures INT NOT NULL,
+    Procedure_description VARCHAR(200) NOT NULL,
+    Tooth VARCHAR(50),
+    Amount_of_procedures BIGINT NOT NULL,
     Total_charge decimal(9,2) NOT NULL DEFAULT '0.00',
     Appointment_date TIMESTAMP NOT NULL,
-    Insurance_claim_ID INTEGER NOT NULL,
+    
     FOREIGN KEY(Patient_ID) REFERENCES Patient(Patient_ID),
-    FOREIGN KEY(Appointment_ID) REFERENCES Appointment(Patient_ID),
+    FOREIGN KEY(Appointment_ID) REFERENCES Appointment(Appointment_ID),
     FOREIGN KEY(Fee_charge_ID) REFERENCES Fee_Charge(Fee_charge_ID)
 );
+
+INSERT INTO Appointment_Procedure(Appointment_ID,Patient_ID,Fee_charge_ID , Procedure_code, Procedure_type, Procedure_description,
+    Tooth,Amount_of_procedures, Total_charge, Appointment_date)
+            VALUES (987654567, 784628391,546546, 35, 'Veneers', 'custom-made shells of improve appearance',
+                    '2', 10000, 1837609.87, '2022-01-19');
     
 
 CREATE TABLE Invoice(
@@ -209,8 +227,8 @@ INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
     
 INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
   	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES (892463789, 'alex@gmail.com', '6734J?', 
-    'Alexander', 'Hernandez', 6135608989, 167283432, 'ABCInsurance1', 31, 'Male',
+    Postal_code, City, Province) VALUES (435435, 'alex@gmail.com', '6734J?', 
+    'Hicham', 'Mazouzi', 6135608989, 167283432, 'ABCInsurance1', 31, 'Male',
     999, 'Brownspring Drive', 'KH6 32D', 'Ottawa', 'Ontario');
 
 INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
