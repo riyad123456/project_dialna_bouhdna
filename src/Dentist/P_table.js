@@ -11,7 +11,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import '../App.css';
 var Ts = ['treatment_ID','treatment_type','patient_ID','medication','symptoms','tooth','patient_condition']
-var Ts1 = ['appointment_ID','patient_ID','fee_charge_ID','medication','symptoms','tooth','patient_condition']
+var Ts1 = ['appointment_ID','patient_ID','procedure_code','procedure_type','procedure_description','tooth','amount_of_procedures','total_charge','appointment_date']
 
 var server = 'http://localhost:5001'
 
@@ -98,9 +98,10 @@ function P_table(props) {
         var newValue = {}
         var elem = document.querySelector('#addForm1')
         var count = 0;
-        Ts.map((key) => {
+        Ts1.map((key) => {
           newValue[key] = elem[count++].value
       })
+      console.log(newValue);
       fetch(server+"/procedureADD", { 
         method: "POST" ,
         headers: {

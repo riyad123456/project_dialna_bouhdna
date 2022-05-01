@@ -34,7 +34,7 @@ const Receptionist = () => {
         )
         )
     }, [])
-    console.log(items) ; 
+   
   return (
     <div>
 
