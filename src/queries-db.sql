@@ -1,8 +1,8 @@
 -- create a tables
 CREATE TABLE Patient(
-    Patient_ID INTEGER PRIMARY KEY,
+    Patient_ID BIGINT PRIMARY KEY,
     Email VARCHAR(30) NOT NULL,
-    Password VARCHAR(30) NOT NULL,
+    
     First_name VARCHAR(30) NOT NULL,
     Last_name VARCHAR(30) NOT NULL,
   	Phone_num BIGINT NOT NULL,
@@ -16,6 +16,52 @@ CREATE TABLE Patient(
     City VARCHAR(30) NOT NULL,
     Province VARCHAR(30) NOT NULL
     );
+
+    INSERT INTO Patient(Patient_ID, Email, First_name, Last_name,
+  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
+    Postal_code, City, Province) VALUES (1, 'samantha25@gmail.com', 'Samantha', 'Green', 6135608989, 167283432, 
+    'ABCInsurance1', 25, 'Female', 1019, 'Acorn Street', 'Ottawa', 'Ontario');
+    
+    INSERT INTO Patient(Patient_ID, Email, First_name, Last_name,
+  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
+    Postal_code, City, Province) VALUES (345678932, 'tim88@gmail.com',  
+    'Timothy', 'Smith', 6132896790, 797886422, 'NewInsurance45', 88, 'Male',
+    38, 'Apple Street', 'K47 32F', 'Ottawa', 'Ontario');
+    
+INSERT INTO Patient(Patient_ID, Email, First_name, Last_name,
+  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
+    Postal_code, City, Province) VALUES (435435, 'alex@gmail.com', 
+    'Hicham', 'Mazouzi', 6135608989, 167283432, 'ABCInsurance1', 31, 'Male',
+    999, 'Brownspring Drive', 'KH6 32D', 'Ottawa', 'Ontario');
+
+INSERT INTO Patient(Patient_ID, Email, First_name, Last_name,
+  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
+    Postal_code, City, Province) VALUES (784628391, 'lilliantay66@gmail.com', 
+    'Lillian', 'Taylor', 6138990943, 676789876, 'NewInsurance45', 66, 'Female',
+    1019, 'Bell Street ', 'K45 32J', 'Toronto', 'Ontario');
+    
+INSERT INTO Patient(Patient_ID, Email, First_name, Last_name,
+  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
+    Postal_code, City, Province) VALUES (763290987, 'sarah00@gmail.com', 
+    'Sarah', 'Mitchell', 6131523787, 898989095, 'OttawaInsurance8', 18, 'Female',
+    76, 'Tamerton Street', 'K54 FE3', 'London', 'Ontario');
+
+INSERT INTO Patient(Patient_ID, Email, First_name, Last_name,
+  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
+    Postal_code, City, Province) VALUES (383863625, 'ben10@gmail.com',  
+    'Ben', 'Collins', 6135678781, 672451989, 'ABCInsurance1', 20, 'Male',
+    4501, 'Charlotte Street', 'K78 23H', 'Brampton', 'Ontario');
+
+
+INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('beno','papipapi123','patient',383863625);
+INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('saraho','papipapi123','patient',763290987);
+INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('lilliano','papipapi123','patient',784628391);
+INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('hichamo','papipapi123','patient',435435);
+INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('samanthap','papipapi123','patient',1);
+INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('timothyo','papipapi123','patient',345678932);
+
+
+    
     
 CREATE TABLE Appointment(
     Appointment_ID INTEGER PRIMARY KEY,
@@ -67,7 +113,7 @@ CREATE TABLE Utilisateur(
 
 );
 
-INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('hichamman','papipapi123','patient',435435);
+
 INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('achraf','iloveines','dentist',876541);
 INSERT INTO Utilisateur(Username, Password,Role, id) VALUES('riyad','lfeerda','receptionist',41545);
 
@@ -147,13 +193,12 @@ CREATE TABLE Record(
     Date_edited DATE NOT NULL,
     Patient_ID INTEGER NOT NULL,
     Progress_note VARCHAR(100) NOT NULL,
-    FOREIGN KEY(Patient_ID) REFERENCES Patient(Patient_ID)
+    FOREIGN KEY(Patient_sID) REFERENCES Patient(Patient_ID)
 );
 
 CREATE TABLE Appointment_Procedure(
     Appointment_ID BIGINT NOT NULL,
     Patient_ID BIGINT NOT NULL,
-    Fee_charge_ID BIGINT NOT NULL,
     Procedure_code BIGINT NOT NULL,
     Procedure_type VARCHAR(50) NOT NULL,
     Procedure_description VARCHAR(200) NOT NULL,
@@ -163,13 +208,12 @@ CREATE TABLE Appointment_Procedure(
     Appointment_date TIMESTAMP NOT NULL,
     
     FOREIGN KEY(Patient_ID) REFERENCES Patient(Patient_ID),
-    FOREIGN KEY(Appointment_ID) REFERENCES Appointment(Appointment_ID),
-    FOREIGN KEY(Fee_charge_ID) REFERENCES Fee_Charge(Fee_charge_ID)
+    FOREIGN KEY(Appointment_ID) REFERENCES Appointment(Appointment_ID)
 );
 
-INSERT INTO Appointment_Procedure(Appointment_ID,Patient_ID,Fee_charge_ID , Procedure_code, Procedure_type, Procedure_description,
+INSERT INTO Appointment_Procedure(Appointment_ID,Patient_ID , Procedure_code, Procedure_type, Procedure_description,
     Tooth,Amount_of_procedures, Total_charge, Appointment_date)
-            VALUES (987654567, 784628391,546546, 35, 'Veneers', 'custom-made shells of improve appearance',
+            VALUES (987654567, 784628391, 35, 'Veneers', 'custom-made shells of improve appearance',
                     '2', 10000, 1837609.87, '2022-01-19');
     
 
@@ -214,41 +258,7 @@ CREATE TABLE Employee(
 );
 
 --- create queries
-INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
-  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES ('1', 'sam', 'samantha25@gmail.com', '123', 'Samantha', 'Green', '6135608989', '167283432', 
-    'ABCInsurance1', '25', 'Female', '1019', 'Acorn Street', 'Ottawa', 'Ontario');
-    
-INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
-  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES ('345678932', 'tim88@gmail.com', 'Password!36', 
-    'Timothy', 'Smith', '6132896790', '797886422', 'NewInsurance45', '88', 'Male',
-    '38', 'Apple Street', 'K47 32F', 'Ottawa', 'Ontario');
-    
-INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
-  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES (435435, 'alex@gmail.com', '6734J?', 
-    'Hicham', 'Mazouzi', 6135608989, 167283432, 'ABCInsurance1', 31, 'Male',
-    999, 'Brownspring Drive', 'KH6 32D', 'Ottawa', 'Ontario');
 
-INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
-  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES (784628391, 'lilliantay66@gmail.com', 'Password45', 
-    'Lillian', 'Taylor', 6138990943, 676789876, 'NewInsurance45', 66, 'Female',
-    1019, 'Bell Street ', 'K45 32J', 'Toronto', 'Ontario');
-    
-INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
-  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES ('763290987', 'sarah00@gmail.com', 'Password!!23', 
-    'Sarah', 'Mitchell', '6131523787', '898989095', 'OttawaInsurance8', '18', 'Female',
-    '76', 'Tamerton Street', 'K54 FE3', 'London', 'Ontario');
-
-INSERT INTO Patient(Patient_ID, Email, Password, First_name, Last_name,
-  	Phone_num, SSN, Insurance, Age, Gender, Street_num, Street_name,
-    Postal_code, City, Province) VALUES ('383863625', 'ben10@gmail.com', 'ben8989!!23', 
-    'Ben', 'Collins', '6135678781', '672451989', 'ABCInsurance1', '20', 'Male',
-    '4501', 'Charlotte Street', 'K78 23H', 'Brampton', 'Ontario');
-    
     
 INSERT INTO Employee(Employee_ID, Email, First_name, Last_name,
       Phone_num, SSN, Employee_role, Insurance, Salary, Age, Gender, Street_num, Street_name, 
