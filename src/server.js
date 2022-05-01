@@ -513,6 +513,38 @@ app.get('/procedure/:id', async (req, res) => {
  
 
 })
+app.post("/procedureADD", async (req, res) => {
+  var aid = req.body.appointment_ID
+  var pid = req.body.patient_ID
+  var email =req.body.email
+  var fname = req.body.first_name
+  var lname = req.body.last_name
+  var ssn = req.body.ssn
+  var role  = req.body.employee_role
+  var age = req.body.age
+  var salary = req.body.salary
+  var gender = req.body.gender
+  var pn= req.body.phone_num
+  var ins =req.body.insurance
+  var num = req.body.street_num
+  var name = req.body.street_name
+  var code = req.body.postal_code
+  var city = req.body.city
+  var prov = req.body.province
+  
+  try {
+    
+    
+    const newP = await pool.query(
+      "INSERT INTO Appointment_Procedure(Appointment_ID,Patient_ID,Fee_charge_ID , Procedure_code, Procedure_type, Procedure_description,Tooth,Amount_of_procedures, Total_charge, Appointment_date)VALUES VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17) RETURNING *",
+      [id, email , fname , lname, pn, ssn,role, ins,salary, age, gender , num, name, prov, city, code,bid]
+    );
+
+    res.json(newP.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 
 

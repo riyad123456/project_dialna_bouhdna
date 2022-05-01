@@ -41,12 +41,12 @@ function P_TBody({data}) {
 
 
   const displayAppointments = (dt) => {
-    title = 'Appointments'
+    title = 'Procedure'
     setCurrentItem(dt)
     
     setShow(true);
-    console.log(server+`/RDV_p/${dt['patient_id']}`);
-    fetch(server+`/RDV_p/${dt['patient_id']}`, { method: "GET" })
+    
+    fetch(server+`/procedure/${dt['patient_id']}`, { method: "GET" })
       .then(res => res.json())
       .then(
         (result) => {
@@ -132,7 +132,7 @@ function Tr({values,delClick, editClick}){
                           <Button variant="outline-primary" onClick= {editClick}>Display Treatments</Button>
                           </li>
                           <li class="list-inline-item">
-                          <Button variant="outline-primary" onClick = {delClick}>Display Appointments</Button>
+                          <Button variant="outline-primary" onClick = {delClick}>Display Procedure</Button>
                           </li>
                       </ul>
                   </td>

@@ -6,26 +6,38 @@ import DB_table from '../DB_table';
 import React, { useEffect, useState } from 'react';
 import Searchbar from './Searchbar';
 import { MDBCol } from "mdbreact";
+import Modal from 'react-bootstrap/Modal'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import '../App.css';
-var Ts = []
+var Ts = ['treatment_ID','treatment_type','patient_ID','medication','symptoms','tooth','patient_condition']
+var Ts1 = ['appointment_ID','patient_ID','fee_charge_ID','medication','symptoms','tooth','patient_condition']
 
 var server = 'http://localhost:5001'
 
 
 var myData =[]
 function P_table(props) {
-    
-    const [items, setItems] = useState([]);
-    const doThis = () => {
-        {props.titles.map(
-            (json,val) => {
-                Ts = Object.keys(json)
-            }
-            )}
-           
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+      setShow(false);
+      
     }
-    
-    doThis();
+    const  handleShow = (key)=>{
+      setShow(true);
+      
+    }
+
+    const [show1, setShow1] = useState(false);
+    const handleClose1 = () => {
+      setShow(false);
+      
+    }
+    const  handleShow1 = (key)=>{
+      setShow1(true);
+    }
+    const [items, setItems] = useState([]);
+   
     const executeSearch = (word) => {
         
         if (word === "") {
@@ -58,6 +70,55 @@ function P_table(props) {
        
        
     }
+
+    const getData = () => {
+        var newValue = {}
+        var elem = document.querySelector('#addForm')
+        var count = 0;
+        Ts.map((key) => {
+          newValue[key] = elem[count++].value
+      })
+      fetch(server+"/TreatmentADD", { 
+        method: "POST" ,
+        headers: {
+              "Content-Type": "application/json",
+              "x-access-token": "token-value",
+            },
+            body: JSON.stringify(newValue)
+      }).then(setShow(false))
+      .then( window.location.reload(false))
+      
+        
+       
+        
+           
+      }
+
+      const getData1 = () => {
+        var newValue = {}
+        var elem = document.querySelector('#addForm1')
+        var count = 0;
+        Ts.map((key) => {
+          newValue[key] = elem[count++].value
+      })
+      fetch(server+"/procedureADD", { 
+        method: "POST" ,
+        headers: {
+              "Content-Type": "application/json",
+              "x-access-token": "token-value",
+            },
+            body: JSON.stringify(newValue)
+      }).then(setShow(false))
+      .then( window.location.reload(false))
+      
+        
+       
+        
+           
+      }
+    const addContent = Ts.map((value) => <FormGroupEmpty Key = {value} />)
+    const addContent1 = Ts1.map((value) => <FormGroupEmpty Key = {value} />)
+
     return (
         <div>
             
@@ -83,9 +144,59 @@ function P_table(props) {
                                     }/>
                                
                             </table>
+                            <br></br>
+                        <Button variant="outline-primary"  onClick={handleShow}>
+                           Add Treatment
+                        </Button>
 
+                        <Button variant="outline-primary"  onClick={handleShow1}>
+                           Add Procedure
+                        </Button>
                         </div>
                     </div>
+                    <Modal show={show} size="lg" onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Treatment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form id="addForm"> 
+          {addContent}
+            
+          </Form>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={getData}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+      
+      <Modal show={show1} size="lg" onHide={handleClose1}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Procedure</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form id="addForm1"> 
+          {addContent1}
+            
+          </Form>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose1}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={getData1}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
                 </div>
             </div>
         </div>
@@ -93,5 +204,15 @@ function P_table(props) {
         </div>
     );
 }
-
+function FormGroupEmpty({Key,value}){
+    return (
+    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label >{Key}</Form.Label>
+              <Form.Control class = {Key}
+              defaultValue={value}
+                autoFocus
+              />
+            </Form.Group>
+            );
+  }
 export default P_table;
