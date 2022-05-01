@@ -2,6 +2,8 @@ import React from 'react'
 import { useRef, useState, useEffect} from 'react';
 import { Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card'
+import Form from 'react-bootstrap/Form'
 
 var server = 'http://localhost:5001'
 const Login = () => {
@@ -80,11 +82,18 @@ const Login = () => {
 
         <Navigate to={`/${userType}/${id}`} replace={true} />
         ) : (
-
+           
+                   
+  
             <section>
+            <br></br>
+            <Card border="dark" style={{ width: '30%',  marginLeft:'auto', marginRight: 'auto', borderRadius: '12px'}}>
+                <Card.Header><h1>Sign In</h1></Card.Header>
+                <Card.Body>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                <h1>Sign In</h1>
+                
                 <form onSubmit={handleSubmit}>
+                <label > Role:  </label>
                     <label >
                         <div className="container">
                             <div className="row">
@@ -102,7 +111,9 @@ const Login = () => {
                             </div>
                         </div>
                     </label>
-                    <label htmlFor="email">Username:</label>
+                    <br></br>
+                    <br></br>
+                    <label htmlFor="email"> Username: </label><br></br>
                     <input type="text"
                     id='email'
                     ref={userRef}
@@ -111,7 +122,9 @@ const Login = () => {
                     value = {user}
                     required  
                     />
-                    <label htmlFor="password">Password:</label>
+                    <br></br>
+                    <br></br>
+                    <label htmlFor="password"> Password: </label><br></br>
                     <input type="password"
                     id='password'
                     ref={userRef}
@@ -121,7 +134,7 @@ const Login = () => {
                     />
                     <label>
                     </label>
-
+<br></br><br></br>
                     <button className='padding : 15px'>
                         Sign In
                     </button>
@@ -139,7 +152,12 @@ const Login = () => {
                     </p>
                     
                 </form>
+                </Card.Body>
+            </Card>
+            <br />
+                
             </section>
+            
         )}
       
       </>
