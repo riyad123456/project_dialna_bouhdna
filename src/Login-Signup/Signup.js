@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card'
 
 var server = 'http://localhost:5001'
 
@@ -86,9 +87,13 @@ const Signup = () => {
 
     <Navigate to={`/`} replace={true} />
     ) : (
-
+      <>
+      <br></br>
+<Card border="dark" style={{ width: '30%',  marginLeft:'auto', marginRight: 'auto', borderRadius: '12px'}}>
+                <Card.Header><h1>Sign Up</h1></Card.Header>
+                <Card.Body>
       <div style={{ margin: '.5rem' , alignContent : 'end'}} >
-      <h2>Sign Up</h2>
+      
       <form onSubmit={handleSubmit}  >
           <label htmlFor="email" style={{ margin: '.5rem' }}>Username:</label>
                       <input type="text"
@@ -223,8 +228,10 @@ const Signup = () => {
               Sign Up
           </button>
       </form>
-      
+     
   </div>
+  </Card.Body>
+            </Card></>
     )}
   
   </>
