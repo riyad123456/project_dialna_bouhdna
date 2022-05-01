@@ -5,6 +5,9 @@ import C_table from './C_table.js';
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
 var server = 'http://localhost:5001'
 
 const Patient = () => {
@@ -117,7 +120,22 @@ const edit = (dt) => {
   
   return (
     <div>
-    <div>Bonjour  {items.first_name} {items.last_name} <Button variant="outline-warning" onClick= {() => handleShow(true)}>Edit</Button> </div>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
+  <Container>
+  <Navbar.Brand href="#home">Bonjour  {items.first_name} {items.last_name}</Navbar.Brand>
+  
+  <Navbar.Collapse id="responsive-navbar-nav" style = {{marginLeft: '80%'}}>
+   
+    <Nav>
+     
+      <Nav.Link eventKey={2} href="#memes">
+      <Button size ='lg'style = {{width: '250px'}}  variant="outline-warning" onClick= {() => handleShow(true)}>Show/ Edit information</Button> 
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+  </Container>
+</Navbar>
+    
     <Modal show={show} size="lg" onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit instance</Modal.Title>
