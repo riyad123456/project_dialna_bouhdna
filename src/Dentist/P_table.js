@@ -11,7 +11,11 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import '../App.css';
 var Ts = ['treatment_ID','treatment_type','patient_ID','medication','symptoms','tooth','patient_condition']
-var Ts1 = ['appointment_ID','patient_ID','procedure_code','procedure_type','procedure_description','tooth','amount_of_procedures','total_charge','appointment_date']
+
+var Ts1 = ['appointment_ID','patient_ID','fee_charge_ID','medication','symptoms','tooth','patient_condition']
+var Ts2 = ["Appointment_ID","Patient_ID","Fee_charge_ID" , "Procedure_code", "Procedure_type", "Procedure_description",
+  "Tooth","Amount_of_procedures", "Total_charge", "Appointment_date"]
+
 
 var server = 'http://localhost:5001'
 
@@ -30,11 +34,19 @@ function P_table(props) {
 
     const [show1, setShow1] = useState(false);
     const handleClose1 = () => {
-      setShow(false);
+      setShow1(false);
       
     }
     const  handleShow1 = (key)=>{
       setShow1(true);
+    }
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => {
+      setShow2(false);
+      
+    }
+    const  handleShow2 = (key)=>{
+      setShow2(true);
     }
     const [items, setItems] = useState([]);
    
@@ -87,6 +99,24 @@ function P_table(props) {
             body: JSON.stringify(newValue)
       }).then(setShow(false))
       .then( window.location.reload(false))
+    }
+
+      const getData2 = () => {
+        var newValue = {}
+        var elem = document.querySelector('#addForm2')
+        var count = 0;
+        Ts2.map((key) => {
+          newValue[key] = elem[count++].value
+      })
+      fetch(server+"/RDVAdd", { 
+        method: "POST" ,
+        headers: {
+              "Content-Type": "application/json",
+              "x-access-token": "token-value",
+            },
+            body: JSON.stringify(newValue)
+      }).then(setShow2(false))
+      .then( window.location.reload(false))
       
         
        
@@ -119,6 +149,7 @@ function P_table(props) {
       }
     const addContent = Ts.map((value) => <FormGroupEmpty Key = {value} />)
     const addContent1 = Ts1.map((value) => <FormGroupEmpty Key = {value} />)
+    const addContent2 = Ts2.map((value) => <FormGroupEmpty Key = {value} />)
 
     return (
         <div>
@@ -152,6 +183,10 @@ function P_table(props) {
 
                         <Button variant="outline-primary"  onClick={handleShow1}>
                            Add Procedure
+                        </Button>
+
+                        <Button variant="outline-primary"  onClick={handleShow2}>
+                           Add Appointment
                         </Button>
                         </div>
                     </div>
@@ -190,10 +225,30 @@ function P_table(props) {
           
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose1}>
+          <Button variant=" secondary" onClick={handleClose1}>
             Cancel
           </Button>
           <Button variant="primary" onClick={getData1}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={show2} size="lg" onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Procedure</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form id="addForm2"> 
+          {addContent2}
+            
+          </Form>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose2}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={getData2}>
             Add
           </Button>
         </Modal.Footer>
@@ -205,6 +260,7 @@ function P_table(props) {
         </div>
     );
 }
+
 function FormGroupEmpty({Key,value}){
     return (
     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -216,4 +272,5 @@ function FormGroupEmpty({Key,value}){
             </Form.Group>
             );
   }
+
 export default P_table;
